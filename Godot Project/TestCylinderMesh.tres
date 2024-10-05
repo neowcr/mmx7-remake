@@ -1,0 +1,8 @@
+[gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://bc2q5htoww2vr"]
+
+[ext_resource type="Material" uid="uid://bdr7gxsbu5c1o" path="res://TestMat.tres" id="1_dv11t"]
+
+[resource]
+material = ExtResource("1_dv11t")
+height = 0.001
+radial_segments = 8

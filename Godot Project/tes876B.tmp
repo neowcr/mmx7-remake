@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsyoj8bj7psao"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_wgnjl"]
+
+[sub_resource type="Environment" id="Environment_psn5d"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8gyud"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sghmm"]
+custom_aabb = AABB(0, 9, 0, 0, 0, 0)
+size = Vector3(7.245, 0.405, 19.54)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_psn5d")
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("1_wgnjl")
+
+[node name="Model" type="Node3D" parent="Player"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Player/Model"]
+mesh = SubResource("CylinderMesh_8gyud")
+skeleton = NodePath("../..")
+
+[node name="pCamOrigin" type="Node3D" parent="Player"]
+
+[node name="pCamSpringArm" type="SpringArm3D" parent="Player/pCamOrigin"]
+spring_length = 2.0
+margin = 0.5
+
+[node name="pCam" type="Camera3D" parent="Player/pCamOrigin/pCamSpringArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.631)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.72357, 0)
+mesh = SubResource("BoxMesh_sghmm")

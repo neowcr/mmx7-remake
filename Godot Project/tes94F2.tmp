@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsyoj8bj7psao"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_wgnjl"]
+
+[sub_resource type="Environment" id="Environment_psn5d"]
+background_color = Color(0.67069, 0.67069, 0.67069, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gmcop"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bp5e"]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8gyud"]
+material = SubResource("StandardMaterial3D_0bp5e")
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_k8iq7"]
+radial_segments = 4
+rings = 0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.834819, 0.550524, 0, -0.550524, 0.834819, -1.55232, 1.8559, 1.74337)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_psn5d")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("1_wgnjl")
+settings_camSensitivity = 0.17
+settings_camInvertX = null
+settings_camInvertY = null
+settings_camSmooth = false
+RUN_SPEED = 7.0
+DASH_SPEED = 17.0
+
+[node name="Collision" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CylinderShape3D_gmcop")
+
+[node name="Model" type="Node3D" parent="Player"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Player/Model"]
+mesh = SubResource("CylinderMesh_8gyud")
+skeleton = NodePath("../..")
+
+[node name="ph_arrow" type="CSGMesh3D" parent="Player/Model/Mesh"]
+transform = Transform3D(0.400266, 0, 0, 0, -0.0145054, 0.341827, 0, -0.959623, -0.00516697, 0, 0.49277, 1.29483)
+mesh = SubResource("CylinderMesh_k8iq7")
+
+[node name="CamRoot" type="Node3D" parent="Player"]
+
+[node name="CamSpringArm" type="SpringArm3D" parent="Player/CamRoot"]
+spring_length = 10.0
+margin = 0.5
+
+[node name="Cam" type="Camera3D" parent="Player/CamRoot/CamSpringArm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.30005)
+fov = 50.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -2, 1.5)
+use_collision = true
+size = Vector3(16, 1, 18)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, 11.5)
+use_collision = true
+size = Vector3(9, 7, 18)

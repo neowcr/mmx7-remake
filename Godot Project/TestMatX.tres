@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bpql3sd75orc6"]
+
+[ext_resource type="Texture2D" uid="uid://d0i67jogwroje" path="res://OLDIE-ik-anims_X_ATLAS_EDIT.png" id="1_etkue"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go1bh"]
+cull_mode = 1
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+
+[resource]
+next_pass = SubResource("StandardMaterial3D_go1bh")
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_etkue")
+metallic = 0.47
+metallic_specular = 0.0
+roughness = 0.0
